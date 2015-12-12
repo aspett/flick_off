@@ -16,7 +16,7 @@ Best run in a `screen` session:
 
 **Or** run as a background task:
 
-`bundle exec ./main.rb --no-output`
+`bundle exec ./main.rb --no-output &`
 
 ## Contributing
 Fork and pull request. This was a very short and crude project to get something going. I won't be surprised if you do or don't want to contribute ;)
