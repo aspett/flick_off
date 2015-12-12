@@ -13,9 +13,10 @@ SLEEP_TIME          = 30
 class PriceAlert
   attr_accessor :last_alert
 
-  def initialize
+  def initialize(output = nil)
     @last_alert = nil
     @mailgun = Mailgun::Client.new(ENV['MG_KEY'])
+    @output = !(output == "--no-output")
   end
 
   def get_last
@@ -58,7 +59,7 @@ class PriceAlert
   end
 
   def send_mail(title:,text:)
-    puts "\nSending email: #{title}\n\n#{text}\n"
+    log "\nSending email: #{title}\n\n#{text}\n"
     @mailgun.send_message(ENV['MG_DOMAIN'],
                           { from: ENV['FROM_EMAIL'],
                             to: ENV['TO_EMAIL'],
@@ -70,6 +71,10 @@ class PriceAlert
     Kernel.loop do
       main
     end
+  end
+
+  def log(text)
+    puts text if @output
   end
 
   def main
@@ -86,13 +91,13 @@ class PriceAlert
       end
     end
 
-    puts latest
+    log latest
   rescue Wits::Error::ClientError => e
-    puts "Wits error: #{e.message}"
+    log "Wits error: #{e.message}"
   ensure
     sleep SLEEP_TIME
   end
 end
 
-pa = PriceAlert.new
+pa = PriceAlert.new(ARGV[0])
 pa.loop
