@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'wits', github: "aspett/wits" # current upstream gem isn't up to date with https
+gem 'wits'
 gem "dotenv"
 gem "mailgun-ruby"
