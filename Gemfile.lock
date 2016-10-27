@@ -25,7 +25,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    wits (1.0.1)
+    wits (1.0.2)
       faraday (~> 0.9.1)
       tzinfo (~> 1.2.2)
 
